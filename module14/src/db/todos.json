@@ -1,0 +1,27 @@
+[
+    {
+      "id": 1,
+      "title": "Buy groceries",
+      "description": "Milk, eggs, bread, and fruits",
+      "isCompleted": false
+    },
+    {
+      "id": 2,
+      "title": "Finish React project",
+      "description": "Complete the user authentication module",
+      "isCompleted": true
+    },
+    {
+      "id": 3,
+      "title": "Book bus tickets",
+      "description": "For Dhaka to Chittagong trip next week",
+      "isCompleted": false
+    },
+    {
+      "id": 4,
+      "title": "Call mechanic",
+      "description": "Schedule maintenance for the bike",
+      "isCompleted": true
+    }
+  ]
+  

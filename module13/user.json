@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Alice Johnson",
+    "email": "alice.johnson@example.com",
+    "age": 28,
+    "city": "New York",
+    "isActive": true
+  },
+  {
+    "id": 2,
+    "name": "David Smith",
+    "email": "david.smith@example.com",
+    "age": 34,
+    "city": "Los Angeles",
+    "isActive": false
+  },
+  {
+    "id": 4,
+    "name": "prioty",
+    "email": "prioty@example.com",
+    "age": 28,
+    "city": "New York",
+    "isActive": true
+  }
+]
