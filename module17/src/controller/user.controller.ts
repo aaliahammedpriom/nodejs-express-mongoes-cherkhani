@@ -1,28 +1,21 @@
 import { Request, Response, Router } from "express";
-import { ObjectId } from "mongodb";
 import { Schema, Types, model } from "mongoose";
+import User from "../model/user.model";
 
 const userRoutes = Router();
 
-const userSchema = new Schema({
-    name: { type: String, required: true },
-    email: { type: String, trim: true, lowercase: true, unique: true, required: true },
-    role: {
-        type: String,
-        enum: ["student", "it", "teacher", "admin"],
-        default: "student"
-    },
-    isActive: { type: Boolean, required: true, default: true }
-});
-
-
-const User = model("User", userSchema)
-
-userRoutes.get('/', (req: Request, res: Response) => {
-    res.send("User Get Route")
+userRoutes.get('/', async (req: Request, res: Response) => {
+    const result = await User.find({})
+    console.log(result)
+    res.send(result)
 })
 userRoutes.get('/:userId', async(req: Request, res: Response) => {
     const result = await User.findOne({ _id: new Types.ObjectId(req.params.userId) })
+    console.log(result)
+    res.send(result)
+})
+userRoutes.patch('/:userId', async(req: Request, res: Response) => {
+    const result = await User.findByIdAndUpdate(req.params.userId,{$set: req.body},{new: true, runValidators:true})
     console.log(result)
     res.send(result)
 })

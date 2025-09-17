@@ -46,11 +46,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importStar(require("express"));
-const users_routes_1 = __importDefault(require("./routes/users.routes"));
+const user_controller_1 = __importDefault(require("./controller/user.controller"));
+const note_controller_1 = __importDefault(require("./controller/note.controller"));
 const app = (0, express_1.default)();
 // middleware
 app.use((0, express_1.json)());
-app.use('/users', users_routes_1.default);
+app.use('/users', user_controller_1.default);
+app.use('/notes', note_controller_1.default);
 app.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.send("Hello Bangladesh");
 }));
