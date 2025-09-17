@@ -1,8 +1,10 @@
 import express, { Application, json } from "express"
-const app: Application = express()
+import userRoutes from "./routes/users.routes";
+const app: Application = express();
 
 // middleware
 app.use(json())
+app.use('/users', userRoutes)
 
 app.get('/', async (req, res)=>{
     res.send("Hello Bangladesh")
