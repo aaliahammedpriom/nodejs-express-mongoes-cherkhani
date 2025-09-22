@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const mongoose_1 = require("mongoose");
 const user_model_1 = __importDefault(require("../model/user.model"));
+const user_zod_1 = require("../zod/user.zod");
 const userRoutes = (0, express_1.Router)();
 userRoutes.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.default.find({});
@@ -33,19 +34,22 @@ userRoutes.patch('/:userId', (req, res) => __awaiter(void 0, void 0, void 0, fun
 }));
 userRoutes.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        // Validate request body with Zod
+        const parsedData = user_zod_1.userZodSchema.parse(req.body);
+        //Create Mongoose document 
         const user = new user_model_1.default({
-            name: req.body.name,
-            email: req.body.email,
-            role: req.body.role,
-            isActive: req.body.isActive
+            name: parsedData.name,
+            email: parsedData.email,
+            role: parsedData.role,
+            isActive: parsedData.isActive
         });
+        yield user.user_instance_hash_password(parsedData.password);
         const saveUser = yield user.save();
-        console.log(saveUser);
-        res.send(saveUser);
+        res.json(saveUser);
     }
     catch (error) {
-        console.log(error.code);
-        res.send(error);
+        console.log(error);
+        res.send(error.message);
     }
 }));
 exports.default = userRoutes;

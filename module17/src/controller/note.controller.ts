@@ -4,7 +4,7 @@ import { Types } from "mongoose";
 
 const noteRoutes = Router()
 noteRoutes.get('/', async (req: Request, res: Response) => {
-    const result = await Note.find({})
+    const result = await Note.find({}).populate("userId","name , email, role")
     console.log(result)
     res.send(result)
 })
@@ -25,9 +25,8 @@ noteRoutes.post('/', async (req: Request, res: Response) => {
         const note = new Note({
             title: req.body.title,
             description: req.body.description,
-            uid: req.body.uid,
-            email: req.body.email,
-            privacy: req.body.privacy
+            privacy: req.body.privacy,
+            userId: req.body.uid
         })
         const saveNote = await note.save()
         res.send(saveNote)

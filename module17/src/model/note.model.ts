@@ -11,20 +11,19 @@ const noteSchema = new Schema<INote>({
         type:String,
         default:'',
     },
-    uid: {
-        type: String,
-        required:true
-    },
-    email: {
-        type:String,
-        required:true
-    },
     privacy:{
         type:String,
         enum:["private", "public"],
         default: "private"
+    },
+    userId:{
+        type: Schema.Types.ObjectId,
+        ref:"User",
+        required: true
     }
     
+},{
+    timestamps:true
 })
 
 export const Note = model("Note", noteSchema)

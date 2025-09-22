@@ -1,8 +1,9 @@
+import { Types } from "mongoose";
+
 export interface INote {
     title: string,
     description: string,
-    uid: string,
-    email: string,
-    privacy: "private" | "public";
+    privacy: "private" | "public",
+    userId: Types.ObjectId
 
 }

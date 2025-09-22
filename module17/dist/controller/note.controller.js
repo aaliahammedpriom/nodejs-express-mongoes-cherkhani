@@ -14,7 +14,7 @@ const note_model_1 = require("../model/note.model");
 const mongoose_1 = require("mongoose");
 const noteRoutes = (0, express_1.Router)();
 noteRoutes.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield note_model_1.Note.find({});
+    const result = yield note_model_1.Note.find({}).populate("userId", "name , email, role");
     console.log(result);
     res.send(result);
 }));
@@ -35,9 +35,8 @@ noteRoutes.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* (
         const note = new note_model_1.Note({
             title: req.body.title,
             description: req.body.description,
-            uid: req.body.uid,
-            email: req.body.email,
-            privacy: req.body.privacy
+            privacy: req.body.privacy,
+            userId: req.body.uid
         });
         const saveNote = yield note.save();
         res.send(saveNote);
